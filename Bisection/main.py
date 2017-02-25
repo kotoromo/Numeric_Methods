@@ -119,7 +119,7 @@ class biseccion:
                         x_n,
                         f(x_n),
                         "Error: ",
-                        self.getError()
+                        self.getEpsilon()
                     )
                 return None
             print(
