@@ -1,7 +1,7 @@
 from util import *
 from decimal import *
 
-class fake_ruler:
+class regula_falsi:
 
     def __init__(self, function, error, limit = 100, intervals = None, intervals_restriction = None):
         """
@@ -129,7 +129,7 @@ class fake_ruler:
 
 
 def main():
-    fake_ruler(
+    regula_falsi(
         lambda x: ((x-6)*x+4)*x+5,
         0.005,
         limit = 10,
