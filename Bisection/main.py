@@ -91,7 +91,7 @@ class biseccion:
                         x_n,
                         f(x_n),
                         "Error: ",
-                        self.getEpsilon)
+                        self.getEpsilon())
                     )
                 return x_n
 
