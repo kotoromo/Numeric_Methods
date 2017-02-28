@@ -145,7 +145,7 @@ def main():
 
     regula_falsi(
         function,
-        0.000001,
+        0.001,
         limit = 100000
     ).start()
 if __name__ == '__main__':
