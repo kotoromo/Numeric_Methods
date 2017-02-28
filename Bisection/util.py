@@ -46,7 +46,7 @@ class util:
 
             returns: float
         """
-        return abs(Decimal((x_prev)-Decimal(x)))
+        return abs(float((x_prev)-float(x)))
 
     def verifyOppositeSign(self, a, b):
         """

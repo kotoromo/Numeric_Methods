@@ -1,5 +1,6 @@
 from util import *
 from decimal import *
+import math
 
 class regula_falsi:
 
@@ -25,7 +26,7 @@ class regula_falsi:
         #TODO Fix god damn intervals_restriction parameter >:c
 
         self.function = function
-        self.epsilon = Decimal(10000000)
+        self.epsilon = float(10000000)
         self.error = error
         self.limit = limit
         self.intervals = intervals
@@ -56,8 +57,8 @@ class regula_falsi:
 
     def start(self):
         iteration = int(0)
-        x = Decimal(0)
-        x_prev = Decimal(0)
+        x = float(0)
+        x_prev = float(0)
 
         f = self.getFunction()
         u = util()
@@ -125,10 +126,11 @@ class regula_falsi:
 
 
     def getX_next(self, a_n, b_n):
-        return Decimal(a_n + b_n)/2.0
+        return float(a_n + b_n)/2.0
 
 
 def main():
+    """
     regula_falsi(
         lambda x: ((x-6)*x+4)*x+5,
         0.005,
@@ -137,5 +139,14 @@ def main():
     ).start()
 
     u = util()
+    """
+
+    function = lambda t: 680*(math.log1p(60.0) -  math.log1p(60.0 - t)) - 9.81*t - 11.2
+
+    regula_falsi(
+        function,
+        0.000001,
+        limit = 100000
+    ).start()
 if __name__ == '__main__':
     main()

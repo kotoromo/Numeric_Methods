@@ -1,5 +1,5 @@
 from util import *
-from decimal import *
+import math
 
 class biseccion:
 
@@ -11,10 +11,10 @@ class biseccion:
         """
 
         self.function = function
-        self.a = Decimal(0)
-        self.b = Decimal(0)
+        self.a = float(0)
+        self.b = float(0)
         self.error = error
-        self.epsilon = Decimal(10000000)
+        self.epsilon = float(10000000)
         self.limit = limit
 
     def getLimit(self):
@@ -56,7 +56,7 @@ class biseccion:
             [a, b]. Returns the root or if it exceeds a certain iteration
             limit, returns None.
 
-            returns: Decimal or None
+            returns: float or None
         """
 
         """
@@ -66,14 +66,14 @@ class biseccion:
                 of a to f(x_n), else, we update the value of b to f(x_n).
         """
         iteration = int(0)
-        x_n = Decimal(0)
-        x_prev = Decimal(0)
+        x_n = float(0)
+        x_prev = float(0)
 
         f = self.function
         u = util()
 
-        a_prev = Decimal(0)
-        b_prev = Decimal(0)
+        a_prev = float(0)
+        b_prev = float(0)
 
         self.a, self.b = u.getInterval(f)
 
@@ -91,7 +91,7 @@ class biseccion:
                         x_n,
                         f(x_n),
                         "Error: ",
-                        self.getEpsilon())
+                        self.getEpsilon()
                     )
                 return x_n
 
@@ -138,13 +138,13 @@ class biseccion:
         return None
 
 
-
-
-
 def main():
-    getcontext().prec = 4
-    obj = biseccion((lambda x: (x**2) - 2), 0.001, limit = 11)
-    obj.start()
+
+    function = lambda t: 680*(math.log1p(60.0) -  math.log1p(60.0 - t)) - 9.81*t - 11.2
+
+    biseccion(
+        function, 0.0000001
+    ).start()
 
     #print(util().verifyOppositeSign(1, 4))
 
