@@ -6,5 +6,5 @@ OBJ = main.o util.o
 %.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-sin: $(OBJ)
+./bin/sin: $(OBJ)
 	gcc $(CFLAGS) -o $@ $^ -lm
