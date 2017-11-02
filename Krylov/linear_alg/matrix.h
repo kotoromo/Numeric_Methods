@@ -60,3 +60,5 @@ char** convert_matrix_to_string(matrix_t);
 double** create_empty_array(int, int);
 
 double** array_to_double_pointer(double[][MAX_SIZE], int, int);
+
+void print_matrix(matrix_t);
