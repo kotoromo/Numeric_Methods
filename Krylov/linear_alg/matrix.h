@@ -2,51 +2,57 @@
 #include<stdbool.h>
 #endif
 
-typedef struct matrix_t Matrix;
+typedef struct Matrix{
+  int n;
+  int m;
+
+  double** content;
+
+}matrix_t;
 
 /** Performs scalar multiplication **/
-Matrix* scale_by(Matrix, double);
+matrix_t* scale_by(matrix_t, double);
 
 /** Takes two matrices A, and B, and performs matrix multiplication.
-  * Returns a Matrix pointer.
+  * Returns a matrix_t pointer.
   *
 **/
-Matrix* multiply(Matrix, Matrix);
+matrix_t* multiply(matrix_t, matrix_t);
 
 /** Takes two matrices A, and B, and performs matrix addition.
-  * Returns a Matrix pointer.
+  * Returns a matrix_t pointer.
 **/
-Matrix* add(Matrix, Matrix);
+matrix_t* add(matrix_t, matrix_t);
 
-/** Computes the transpose of the given Matrix.
-  * Returns a Matrix pointer.
+/** Computes the transpose of the given matrix_t.
+  * Returns a matrix_t pointer.
 **/
-Matrix* transpose(Matrix);
+matrix_t* transpose(matrix_t);
 
-/** Computes the inverse of a Matrix.
-  * Returns a Matrix pointer.
+/** Computes the inverse of a matrix_t.
+  * Returns a matrix_t pointer.
 
 **/
-Matrix* inverse(Matrix);
+matrix_t* inverse(matrix_t);
 
-/** Computes the determinant of a Matrix.
+/** Computes the determinant of a matrix_t.
   * Returns result:double
 **/
-double det(Matrix);
+double det(matrix_t);
 
 /** Assigns memory space for matrix and initializes them with the given 2-d
   * array.
-  * Returns Matrix pointer.
+  * Returns matrix_t pointer.
 **/
 
-Matrix* define_matrix(double**, int, int);
+matrix_t* define_matrix(double**, int, int);
 
-bool is_square(Matrix);
+bool is_square(matrix_t);
 
-Matrix* empty_matrix(int, int);
+matrix_t* empty_matrix(int, int);
 
-void free_matrix(Matrix*);
+void free_matrix(matrix_t*);
 
-char** convert_matrix_to_string(Matrix);
+char** convert_matrix_to_string(matrix_t);
 
 double** create_empty_array(int, int);

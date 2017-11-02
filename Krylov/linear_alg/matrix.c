@@ -10,16 +10,9 @@
 #include<stdbool.h>
 #endif
 
+#include "matrix.h"
 
-typedef struct matrix_t{
-  int n;
-  int m;
-
-  double** content;
-
-}Matrix;
-
-Matrix* empty_matrix(int n, int m){
+matrix_t* empty_matrix(int n, int m){
   // [ [] ] = [ [](1) [](2) ... [](n) ]
   double** array = (double**) calloc(1, n);
 
@@ -27,7 +20,7 @@ Matrix* empty_matrix(int n, int m){
     array[i] = (double*) calloc(m, sizeof(double));
   }
 
-  Matrix* A = (Matrix*) calloc(1, sizeof(Matrix));
+  matrix_t* A = (matrix_t*) calloc(1, sizeof(matrix_t));
 
   A->n = n;
 
@@ -46,8 +39,8 @@ Matrix* empty_matrix(int n, int m){
 }
 
 /** Performs scalar multiplication **/
-Matrix* scale_by(Matrix A, double p){
-  Matrix* B = &A;
+matrix_t* scale_by(matrix_t A, double p){
+  matrix_t* B = &A;
 
   for(int i = 0; i<A.n; i++){
     for(int j = 0; j<A.m; j++){
@@ -59,10 +52,10 @@ Matrix* scale_by(Matrix A, double p){
 }
 
 /** Takes two matrices A, and B, and performs matrix multiplication.
-  * Returns a Matrix pointer.
+  * Returns a matrix_t pointer.
   *
 **/
-Matrix* multiply(Matrix A, Matrix B){
+matrix_t* multiply(matrix_t A, matrix_t B){
   // check for not null.
   if(&A == NULL || &B == NULL) // NOTE Check for possible future errors.
     return NULL;
@@ -73,41 +66,41 @@ Matrix* multiply(Matrix A, Matrix B){
     return NULL;
   }
 
-  Matrix* C = empty_matrix(A.m, B.n);
+  matrix_t* C = empty_matrix(A.m, B.n);
 
   return C;
 
 }
 
 /** Takes two matrices A, and B, and performs matrix addition.
-  * Returns a Matrix pointer.
+  * Returns a matrix_t pointer.
 **/
-Matrix* add(Matrix, Matrix);
+matrix_t* add(matrix_t, matrix_t);
 
-/** Computes the transpose of the given Matrix.
-  * Returns a Matrix pointer.
+/** Computes the transpose of the given matrix_t.
+  * Returns a matrix_t pointer.
 **/
-Matrix* transpose(Matrix);
+matrix_t* transpose(matrix_t);
 
-/** Computes the inverse of a Matrix.
-  * Returns a Matrix pointer.
+/** Computes the inverse of a matrix_t.
+  * Returns a matrix_t pointer.
 
 **/
-Matrix* inverse(Matrix);
+matrix_t* inverse(matrix_t);
 
-/** Computes the determinant of a Matrix.
+/** Computes the determinant of a matrix_t.
   * Returns result:double
 **/
-double det(Matrix A);
+double det(matrix_t A);
 
 
-Matrix* define_matrix(double** array, int n, int m){
+matrix_t* define_matrix(double** array, int n, int m){
 
   if(array == NULL || &n == NULL || &m == NULL){
     return NULL;
   }
 
-  Matrix* A = (Matrix*) calloc(1, sizeof(Matrix));
+  matrix_t* A = (matrix_t*) calloc(1, sizeof(matrix_t));
 
   A->n = n;
 
@@ -119,7 +112,7 @@ Matrix* define_matrix(double** array, int n, int m){
 }
 
 
-void free_matrix(Matrix* A){
+void free_matrix(matrix_t* A){
   double** array = A->content;
 
   for(int i = 0; i<A->n; i++){
@@ -133,7 +126,7 @@ void free_matrix(Matrix* A){
   return;
 }
 
-bool is_square(Matrix A){
+bool is_square(matrix_t A){
   if(&A != NULL)
     if(A.n == A.m)
       return true;
@@ -141,7 +134,7 @@ bool is_square(Matrix A){
       return false;
 }
 
-void print_matrix(Matrix A){
+void print_matrix(matrix_t A){
   for(int i = 0; i<A.n; i++){
     printf("|");
     for(int j = 0; j<A.m; j++){

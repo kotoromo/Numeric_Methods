@@ -1,17 +1,21 @@
 #include "matrix.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define BUFFER_SIZE 1024
 
 int main(void){
-  /**double** a = (double**)create_empty_array(2, 2);
-  //double b[2][2] = a;
+  double** a = (double**)create_empty_array(2, 2);
 
-  Matrix* A = define_matrix(a, 2, 2);
-  **/
+  a[0][0] = 1;
+  a[0][1] = 2;
+  a[1][0] = 3;
+  a[1][1] = 4;
 
-  Matrix* A = empty_matrix(2, 2);
+  matrix_t* A = define_matrix(a, 2, 2);
+
+  //matrix_t* A = empty_matrix(2, 2);
 
   for(int i = 0; i<A->n; i++){
     printf("|");
@@ -20,8 +24,6 @@ int main(void){
     }
     printf("|\n");
   }
-
-  printf("%f", A->content[0][0]);
 
   free(A);
 
