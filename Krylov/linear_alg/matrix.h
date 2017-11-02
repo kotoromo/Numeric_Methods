@@ -2,6 +2,8 @@
 #include<stdbool.h>
 #endif
 
+#define MAX_SIZE 1024
+
 typedef struct Matrix{
   int n;
   int m;
@@ -56,3 +58,5 @@ void free_matrix(matrix_t*);
 char** convert_matrix_to_string(matrix_t);
 
 double** create_empty_array(int, int);
+
+double** array_to_double_pointer(double[][MAX_SIZE], int, int);

@@ -154,3 +154,19 @@ double** create_empty_array(int n, int m){
 
   return a;
 }
+
+double** array_to_double_pointer(double array [][MAX_SIZE], int n, int m){
+  double** output = (double**) calloc(n, sizeof(double*));
+
+  for(int i = 0; i<n; i++){
+    output[i] = (double*) calloc(m, sizeof(double));
+  }
+
+  for(int i = 0; i<n; i++){
+    for(int j = 0; j<m; j++){
+      output[i][j] = array[i][j];
+    }
+  }
+
+  return output;
+}

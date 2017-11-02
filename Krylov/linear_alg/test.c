@@ -3,19 +3,17 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define BUFFER_SIZE 1024
-
 int main(void){
   double** a = (double**)create_empty_array(2, 2);
 
-  a[0][0] = 1;
-  a[0][1] = 2;
-  a[1][0] = 3;
-  a[1][1] = 4;
+  double array[2][MAX_SIZE] = {
+    {0, 9},
+    {8, 7}
+  };
+
+  a = array_to_double_pointer(array, 2, 2);
 
   matrix_t* A = define_matrix(a, 2, 2);
-
-  //matrix_t* A = empty_matrix(2, 2);
 
   for(int i = 0; i<A->n; i++){
     printf("|");
