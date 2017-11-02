@@ -17,7 +17,7 @@
 **/
 matrix_t* empty_matrix(int n, int m){
   // [ [] ] = [ [](1) [](2) ... [](n) ]
-  double** array = (double**) calloc(1, n);
+  double** array = (double**) calloc(n, sizeof(double*));
 
   for(int i = 0; i<n; i++){
     array[i] = (double*) calloc(m, sizeof(double));
@@ -30,13 +30,6 @@ matrix_t* empty_matrix(int n, int m){
   A->m = m;
 
   A->content = array;
-
-  for(int i = 0; i<A->n; i++){
-    free(array[i]);
-
-  }
-
-  free(array);
 
   return A;
 }
@@ -78,7 +71,21 @@ matrix_t* multiply(matrix_t A, matrix_t B){
 /** Takes two matrices A, and B, and performs matrix addition.
   * Returns a matrix_t pointer.
 **/
-matrix_t* add(matrix_t, matrix_t);
+matrix_t* add(matrix_t A, matrix_t B){
+  // Can only sum same order matrices.
+  if(A.n != B.n || A.m != B.m)
+    return NULL;
+
+  matrix_t* C = empty_matrix(A.n, A.m);
+
+  for(int i = 0; i<C->n; i++)
+    for(int j = 0; j<C->m; j++){
+      C->content[i][j] = A.content[i][j] + B.content[i][j];
+      printf("%f + %f = %f\n", A.content[i][j], B.content[i][j], C->content[i][j]);
+    }
+
+  return C;
+}
 
 /** Computes the transpose of the given matrix_t.
   * Returns a matrix_t pointer.
