@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <float.h>
 #include "util.h"
 
 #define PI 3.1416
@@ -17,6 +18,10 @@ int main(int argc, char const *argv[]) {
   sscanf(argv[1],"%lf", &angle);
   angle = PI*angle;
 
+  if(angle > 2*PI){
+    angle = 0;
+  }
+
   // Definimos la función a evaluar en la suma.
   double function(double x, int n){
     double res = 0.0;
@@ -27,7 +32,7 @@ int main(int argc, char const *argv[]) {
   }
 
   double (*f)(double, int) = &function;
-  printf("sin(%f*PI) = %f\n", angle, sum_iter_fn(0, 6, f, angle));
+  printf("sin(%f*PI) = %.*e\n", angle/PI, DECIMAL_DIG-17, sum_iter_fn_while(f, angle));
 
   return 0;
 }

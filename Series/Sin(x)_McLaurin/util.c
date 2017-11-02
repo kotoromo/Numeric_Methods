@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #endif
 
+#ifndef stdlib
+#include <stdio.h>
+#endif
+
+#ifndef math
+#include <math.h>
+#endif
+
 #include "util.h"
 
 // Definimos la función que calula de manera recursiva el factorial de un numero real x
@@ -40,4 +48,33 @@ double sum_iter_fn(int inf_lim, int sup_lim, double (*f)(double, int), double x)
   }
 
   return res;
+}
+
+double sum_iter_fn_while(double (*f)(double, int), double x){
+  double res = 0.0;
+  double previous = 0.0;
+  int i = 0;
+  do{
+    previous = absolute(res);
+    res += (*f)(x, i);
+    i++;
+    //printf("res = %lf\n", absolute(res-previous));
+
+  }while(absolute(res - previous) > 0.00005);
+
+  printf("Iteraciones hechas: %d\nDelta X = %lf\n", i, absolute(res-previous)); //DEBUG
+
+  if(isnan(res)){
+    (res > 0)?(res = 1):(res = -1);
+  }
+  
+  return res;
+}
+
+double absolute(double x){
+  if(x < 0){
+    return x*(-1);
+  }else{
+    return x;
+  }
 }
