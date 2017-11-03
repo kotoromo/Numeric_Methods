@@ -53,7 +53,7 @@ bool is_square(matrix_t);
 
 matrix_t* empty_matrix(int, int);
 
-void free_matrix(matrix_t*);
+int free_matrix(matrix_t*);
 
 char** convert_matrix_to_string(matrix_t);
 
