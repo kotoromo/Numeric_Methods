@@ -126,19 +126,18 @@ matrix_t* define_matrix(double** array, int n, int m){
 }
 
 
-/** Frees the space in memory used by the matrix A instance. **/
-void free_matrix(matrix_t* A){
-  double** array = A->content;
-
-  for(int i = 0; i<A->n; i++){
-    free(array[i]);
+/** Frees the space in memory used by the matrix R instance. **/
+int free_matrix(matrix_t* R){
+  for(int i = 0; i<R->n; i++){
+    free(R->content[i]);
   }
 
-  free(array);
+  free(R->content);
 
-  free(A);
+  free(R);
 
-  return;
+  return EXIT_SUCCESS;
+
 }
 
 /** Computes whether the given matrix A is a square matrix
