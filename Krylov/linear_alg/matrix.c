@@ -72,7 +72,7 @@ matrix_t* multiply(matrix_t A, matrix_t B){
     return NULL;
 
   // check whether rank condition is satisfied.
-  // (AB exists iff a(ij), b(kl) | j = k)
+  // (AB exists iff a(ij), b(kl) | j <-> k)
   if(A.m != B.n){
     return NULL;
   }
@@ -112,7 +112,18 @@ matrix_t* add(matrix_t A, matrix_t B){
 /** Computes the transpose of the given matrix_t.
   * Returns a matrix_t pointer.
 **/
-matrix_t* transpose(matrix_t);
+matrix_t* transpose(matrix_t A){
+  if(!&A)
+    return NULL;
+  
+  matrix_t* A_t = empty_matrix(A.m, A.n);
+
+  for(int i = 0; i<A.m; i++)
+    for(int j = 0; j<A.n; j++)
+      A_t->content[i][j] = A.content[j][i];
+
+  return A_t;
+}
 
 /** Computes the inverse of a matrix_t.
   * Returns a matrix_t pointer.
