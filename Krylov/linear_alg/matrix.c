@@ -77,8 +77,15 @@ matrix_t* multiply(matrix_t A, matrix_t B){
     return NULL;
   }
 
-  matrix_t* C = empty_matrix(A.m, B.n);
+  matrix_t* C = empty_matrix(A.n, B.m);
 
+  for(int m = 0; m<A.m; m++){
+    for(int i = 0; i<A.m; i++){
+      for(int j = 0; j<B.n; j++){
+        C->content[m][i] += A.content[m][j]*B.content[j][i];
+      }
+    }
+  }
   return C;
 
 }
