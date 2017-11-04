@@ -34,13 +34,29 @@ matrix_t* empty_matrix(int n, int m){
   return A;
 }
 
-/** Performs scalar multiplication **/
-matrix_t* scale_by(matrix_t A, double p){
-  matrix_t* B = &A;
+/** Function which copies given matrix A
+  * Returns a pointer copy of matrix A.
+**/
+matrix_t* copy_matrix(matrix_t A){
+  matrix_t* C = empty_matrix(A.n, A.m);
 
-  for(int i = 0; i<A.n; i++){
-    for(int j = 0; j<A.m; j++){
-      B->content[i][j] = B->content[i][j]*p;
+  for(int i = 0; i<A.n; i++)
+    for(int j = 0; j<A.m; j++)
+      C->content[i][j] = A.content[i][j];
+
+  return C;
+}
+
+/** Performs scalar multiplication
+  * Returns a pointer to the scaled matrix.
+**/
+matrix_t* scale_by(matrix_t A, double p){
+  matrix_t* B = copy_matrix(A);
+
+  for(int i = 0; i<B->n; i++){
+    for(int j = 0; j<B->m; j++){
+      //B->content[i][j] *= B->content[i][j]*p;
+      B->content[i][j] *= p;
     }
   }
 
@@ -81,7 +97,7 @@ matrix_t* add(matrix_t A, matrix_t B){
   for(int i = 0; i<C->n; i++)
     for(int j = 0; j<C->m; j++){
       C->content[i][j] = A.content[i][j] + B.content[i][j];
-      printf("%f + %f = %f\n", A.content[i][j], B.content[i][j], C->content[i][j]);
+
     }
 
   return C;
