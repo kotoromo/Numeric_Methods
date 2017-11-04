@@ -65,11 +65,10 @@ matrix_t* scale_by(matrix_t A, double p){
 
 /** Takes two matrices A, and B, and performs matrix multiplication.
   * Returns a matrix_t pointer.
-  *
 **/
 matrix_t* multiply(matrix_t A, matrix_t B){
   // check for not null.
-  if(&A == NULL || &B == NULL) // NOTE Check for possible future errors.
+  if(!&A|| !&B) // NOTE Check for possible future errors.
     return NULL;
 
   // check whether rank condition is satisfied.
@@ -126,7 +125,7 @@ double det(matrix_t A);
 **/
 matrix_t* define_matrix(double** array, int n, int m){
 
-  if(array == NULL || &n == NULL || &m == NULL){
+  if(!array){
     return NULL;
   }
 
@@ -160,7 +159,7 @@ int free_matrix(matrix_t* R){
   * Returns boolean
 **/
 bool is_square(matrix_t A){
-  if(&A != NULL)
+  if(!&A)
     if(A.n == A.m)
       return true;
     else
